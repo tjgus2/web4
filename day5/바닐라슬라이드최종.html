@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바닐라슬라이드최종</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .slide_container {
+            width: 1000px;
+            height: 500px;
+        }
+
+        .slide {
+            display: flex;
+            height: 500px;
+        }
+
+        .slide > li {
+            width: 1000px;
+            height: 500px;
+            list-style: none;
+        }
+
+        img {
+            width: 1000px;
+            height: 500px;
+        }
+
+        .slide_btns {
+            width: 1000px;
+            display: flex;
+
+        }
+
+        .slide_btns > button {
+            width: 100px;
+            height: 50px;
+            font-size: 30px;
+            background-color: slateblue;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dot_box {
+            display: flex;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgb(189, 182, 237);
+            border-radius: 50%;
+            margin: 8px;
+        }
+
+        .active {
+            background-color: rgb(189, 182, 237);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide_container">
+        <ul class="slide">
+            <li class="slider_01">
+                <img src="./1.jpeg" alt="">
+            </li>
+            <li class="slider_02">
+                <img src="./2.jpg" alt="">
+            </li>
+            <li class="slider_03">
+                <img src="./3.jpeg" alt="">
+            </li>
+            <li class="slider_04">
+                <img src="./4.jpeg" alt="">
+            </li>
+            <li class="slider_05">
+                <img src="./5.jpg" alt="">
+            </li>
+        </ul>
+    </div>
+
+    <div class="slide_btns">
+        <button>prev</button>
+        <div class="dot_box">
+            <div class="dot"></div>
+            <div class="dot active"></div>
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelector(".slide_btns"); // 닷을 포함한 전체 버튼 박스스
+        const viewBox = document.querySelector(".slide_container"); // 보여지는 부분
+        const slide = document.querySelector(".slide"); // ul
+        const dotBox = document.querySelector(".dot_box"); // dot이 들어가는 빈 div
+        const sliderWidth = 1000; // 슬라이드 한 장의 너비비
+        let moveCheck = true; // 이동중임을 체크하는 변수
+
+        //-----------------------------------------
+
+        const first = slide.firstElementChild.cloneNode(true);
+        // firstElementChild: 현재 요소의 첫번째 자식요소를 반환
+        const last = slide.lastElementChild.cloneNode(true);
+        // cloneNode(true): 선택적 요소와 그 모든 자식요소를 복제함
+
+        slide.appendChild(first);
+        // appendChild: 부모요소에 자식 요소를 맨 마지막에 추가
+
+        slide.insertBefore(last, slide, firstElementChild);
+        // insertBefore: 특정 요소 앞에 새 노드를 추가
+
+        let sliderLength = slide.childElementCount;
+        slide.style.width = sliderLength*sliderWidth + 'px';
+        // ul 길이조절
+
+        // 처음 브라우저 열었을 때 보이는 인덱스 설정
+        let index = 1;
+        slide.style.transform = `translateX(-${index*sliderWidth}px)`;
+        //-----------------------------------------
+
+        function prev() {
+            if (moveCheck) {
+                moveCheck = false; // prev함수를 실행 중 다시 prev가 실행되지 않도록 잠시 false로 변경
+                index--;
+            }
+        }
+    </script>
+</body>
+</html>
