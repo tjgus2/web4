@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카운트업</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(1, 1, 30);
+            color: #fff;
+            height: 3000px;
+        }
+
+        .counter_section {
+            margin-top: 1000px;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+
+        }
+
+        .number {
+            font-size: 60px;
+            color: cornflowerblue;
+        }
+
+        .label {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section class="counter_section">
+        <div class="counter_box">
+            <div class="number" data-target="1500">0</div>
+            <div class="label">HTML</div>
+        </div>
+        <div class="counter_box">
+            <div class="number" data-target="240">0</div>
+            <div class="label">CSS</div>
+        </div>
+        <div class="counter_box">
+            <div class="number" data-target="98">0</div>
+            <div class="label">Javascript</div>
+        </div>
+    </section>
+    <script>
+        const counters = document.querySelectorAll(".number");
+
+        function animateCounter(counter) {
+            counter.innerText = '0';
+            const target = +counter.getAttribute('data-target');
+            // getAttribute: 속성을 가져옴. data-targget 안에 들어있는 값을 문자열로 반환함
+            // 즉 1500이 data-target에 들어있다면 숫자처럼 보여도 "1500"
+            // 문자 -> 숫자
+            // Number("1500") / parseInt("1500") -> 1500 정수로 바꿈 / +"1500" -> 
+            // 타겟을 숫자로 바꾸겠다
+
+            let current = 0;
+            // 현재 숫자 초기화
+
+            const update = () => {
+                // 즉시실행함수(화살표 함수)
+                const increment = target / 100;
+                // target = 1500 / increment = 15
+                // 15번 100번 더하면 1500에 도달할 것임
+                // 5 / 19 / 1500 어떤 수를 작성하던지 100등분으로 나눠서 100번 증가하게 만들면 모든 숫자를 100번 증가하게 될테니 숫자 증가 애니메이션 
+                if (current < target) {
+                    current += increment
+                    // 현재 0인 current에 increment를 계속 더해줌
+                    // 0 = 15 -> 30 -> 45 -> 60
+                    counter.innerText = Math.ceil(current);
+                    requestAnimationFrame(update);
+                    // requestAnimationFrame: 자바스크립트 내장함수
+                    // 다음화면을 그릴 때 update라는 함수를 다시 실행한다는 뜻
+                    // update() 0 -> 15
+                    // update() 15 -> 30
+                }
+            }
+        };
+
+        counters.forEach(counter => {
+
+        })
+    </script>
+</body>
+</html>
