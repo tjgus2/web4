@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스타벅스 지점검색</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .map_section {
+            display: flex;
+            background-color: rgb(42, 82, 42);
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            color: #fff;
+        }
+
+        .left > p {
+            font-size: 24px;
+        }
+
+        .left > h1 {
+            font-size: 60px;
+            margin: 0;
+        }
+
+        .right {
+            width: 300px;
+        }
+
+        .right > h2 {
+            font-size: 32px;
+            margin: 0;
+        }
+
+        .search_icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .input,
+        .search_icon {
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            background: none;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .input_box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #fff;
+            padding: 4px 16px;
+            width: 100%;
+            margin-top: 32px;
+            border-radius: 8px;
+        }
+
+        .map {
+            border-radius: 16px;
+        }
+
+        .input::placeholder {
+            color: #fff;
+        }
+
+    </style>
+</head>
+
+<body>
+    <section class="map_section">
+        <div class="left">
+            <p>반짝반짝 빛나는 커피 드실텨?</p>
+            <h1>Starbucks place</h1>
+            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3167.6994897358272!2d126.7021835!3d37.44420330000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b7bd0a12a4cf7%3A0xc55f4697555b19d5!2z7Iqk7YOA67KF7IqkIOq1rOyblOuhnOuNsOyYpOygkA!5e0!3m2!1sko!2skr!4v1748228852160!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="right">
+            <h2>지점찾기</h2>
+            <div class="input_box">
+                <input id="input_text" class="input" type="text" placeholder="지역을 입력하세요">
+                <button class="search_icon">
+                    <img src="./Group 30.png" alt="지점검색버튼">
+                    <!-- alt 쓰는 이유: 접근성을 높이는 방법 -->
+                    <!-- 접근성: 시각장애인 또는 고령층 등 모든 사람이 웹을 사용하는데 불편함이 없도록 웹을 설계하는 것을 말함 -->
+                </button>
+            </div>
+        </div>
+    </section>
+    <script>
+        /*
+        1. input_text 가져오기
+        2. search_icon 가져오기
+        3. search_icon 을 비활성화 해놓기 disabled 속성을 활용
+        4. 시각적으로 비활성화 된 것이 보이게 search_icon의 스타일을 opacity 0.5로 변경해줌
+        */
+
+        const inputText = document.getElementById("input_text");
+        const btn = document.querySelector(".search_icon");
+        btn.disabled = true; 
+        // 처음엔 비활성화
+        // disabled: 따로 만든 변수 X -> html요소의 속성(button / input 등)에 기본적으로 존재하는 속성
+        btn.style.opacity = 0.3
+
+        inputText.addEventListener("input", () => {
+            // addEventListener("input"): 글자를 입력 / 글자를 지우거나 복사하거나 붙여넣기 하거나 자동완성하거나 등등
+            if (inputText.value.trim() !== "") {
+                // input에 어떤 값이 들어와야 작동함
+                // trim: " " <- 눈에 보이진 않지만 공백이 존재함(값은 있다라는 것)
+                // trim: 입력한 문자의 공백을 제거 "  강남  " -> "강남"
+                // 즉 정말 텍스트가 존재하는지 확인하는 메소드
+                // inputText.value: 사용자가 입력한 값
+                // 사용자가 입력한 값이 ""과 달라서 비어있지 않다면! 아래 코드를 실행하겠다
+                btn.disabled = false;
+                // input에 어떤 값이 들어왔ㅅ다면 disbled을 끈다
+                btn.style.opacity = 1;
+            } else {
+                // 만약 사용자가 입력한 값이 빈값이라면
+                btn.disabled = true; 
+                btn.style.opacity = 0.3;
+                // 그대로 비활성화 유지
+            }
+        });
+
+        function input() {
+            const query = encodeURIComponent("스타벅스 " + inputText.value.trim());
+            // encodeURIComponent: 주소창에 특수문자나 한글을 그대로 입력할 수 없기 때문에 웹 주소에 맞게 인코딩 해주는 메소드
+            window.open("https://www.google.co.kr/maps/search/" + query + "/data=!3m1!4b1");
+        }
+    </script>
+</body>
+
+</html>
