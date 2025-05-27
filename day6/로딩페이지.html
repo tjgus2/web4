@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로딩페이지</title>
     <style>
-
         body {
             margin: 0;
             padding: 0;
         }
 
-        .loding_contianer {
+        .loading_container {
             position: fixed;
             top: 0;
             left: 0;
@@ -29,24 +28,24 @@
             gap: 16px;
             padding: 24px;
         }
-        
+
         .dot {
             width: 16px;
             height: 16px;
-            background-color: #fff;
             border-radius: 50%;
+            background-color: #fff;
             animation: bolls 1.5s infinite linear;
         }
 
-        .dot:nth-child(2){
+        .dot:nth-child(2) {
             animation-delay: 0.3s;
         }
 
-        .dot:nth-child(3){
+        .dot:nth-child(3) {
             animation-delay: 0.6s;
         }
 
-        .loding_text {
+        .loading_text {
             font-size: 20px;
             color: #fff;
             font-weight: 900;
@@ -57,6 +56,7 @@
             0% {
                 transform: translateY(1);
             }
+
             50% {
                 transform: translateY(20px);
             }
@@ -78,13 +78,13 @@
     </style>
 </head>
 <body>
-    <section class="loding_contianer">
+    <section class="loading_container">
         <div class="dots">
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
         </div>
-        <p class="loding_text">사이트를 준비중입니다.</p>
+        <p class="loading_text">사이트를 준비중입니다.</p>
     </section>
 
     <section class="main_container">
@@ -93,19 +93,21 @@
     </section>
 
     <script>
-        function hideLoading(){
-            //loding_contianer랑 main_container 가져오기
-            // 로딩컨테이너에 히든 클래스 붙이기
-            //메인컨테이너의 스타일을 display block 으로 변경하기
-            const lodingContainer = document.querySelector('.loding_contianer');
-            const mainContainer = document.querySelector('.main_contianer');
-            lodingContainer.classList.add("hidden");
-            mainContainer.style.display = 'block';
-        }
+        function hideLoading() {
+            /*
+            loding_contianer랑 main_container 가져오기
+            로딩컨테이너에 히든 클래스 붙이기
+            메인컨테이너의 스타일을 display block 으로 변경하기
+            */
 
-        // 브라우저를 로드했을 때 ( DOMContentLoaded ) hideLoading함수를 실행
-        document.addEventListener("DOMContentLoaded",function(){
-            setTimeout(hideLoading,3000);
+            const lodingContainer = document.querySelector(".loading_container");
+            const mainContainer = document.querySelector(".main_container");
+            lodingContainer.classList.add("hidden");
+            mainContainer.style.dispatch = 'block';
+        }
+        // 브라우저를 로드했을 때 (DOMContentLoaded) hideLoading함수를 실행
+        document.addEventListener("DOMContentLoaded",function() {
+            setTimeout(hideLoading, 3000);
         })
     </script>
 </body>

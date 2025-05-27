@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마우스 따라오는 커서</title>
     <style>
-        .cursor{
+        .cursor {
             width: 15px;
             height: 15px;
-            background-color: lightseagreen;
+            background-color: aquamarine;
             border-radius: 50%;
             transition: 0.1s;
         }
@@ -19,23 +19,23 @@
     <script>
         const cursor = document.querySelector(".cursor");
 
-        document.addEventListener("mousemove",(e)=>{
-            console.log(`x : ${e.pageX}`);
-            console.log(`Y : ${e.pageY}`);
-            //pageX,Y : mouseevent객체의 속성 마우스 이벤트가 발생한 위치의 좌표를 알수있음
-            //커서의 스타일을 e.pageX / e.pageY 값 넣어주기
+        // 커서를 따라 움직이도록 설정
+        document.addEventListener("mousemove", (e) => {
             cursor.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
+            // pageX,pageY : MouseEvent 객체의 속성으로, 마우스 이벤트가 발생한 위치의 문서(document) 기준 좌표를 나타냄
         })
 
-        document.addEventListener("mousedown",()=>{
-            //커서의 스타일을 1.5배 확장시키기!
+        // 클릭 시 커서 크기 증가
+        document.addEventListener("mousedown", () => {
             cursor.style.transform += "scale(1.5)";
-        });
+        })
 
-        document.addEventListener("mouseup",()=>{
-            cursor.style.transform = cursor.style.transform.replace("scale(1.5)","");
-            //replace : 앞(제거할값) 뒤(새로 넣을 값)
-        });
+        // 클릭 해제 시 크기 복구
+        document.addEventListener("mouseup", () => {
+            cursor.style.transform = cursor.style.transform.replace("scale(1.5)", "");
+            // replace("제거할 값", "새로 넣을 값"): 문자열에서 특정 부분을 찾아 다른 문자열로 대체하는 메소드
+            // transfomr 값에서 "scale(1.5)"를 찾아 빈 문자열("")로 대체
+        })
     </script>
 </body>
 </html>
