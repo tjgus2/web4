@@ -5,48 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로딩페이지</title>
     <style>
+
         body {
             margin: 0;
             padding: 0;
         }
 
-        .loding_container {
+        .loding_contianer {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgb(219, 180, 187), rgb(207, 105, 122));
+            background: linear-gradient(135deg,pink,rgb(255, 127, 148),rgb(255, 66, 98));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .dots {
             display: flex;
+            gap: 16px;
+            padding: 24px;
         }
-
+        
         .dot {
             width: 16px;
             height: 16px;
-            background: #fff;
+            background-color: #fff;
             border-radius: 50%;
-            
+            animation: bolls 1.5s infinite linear;
+        }
+
+        .dot:nth-child(2){
+            animation-delay: 0.3s;
+        }
+
+        .dot:nth-child(3){
+            animation-delay: 0.6s;
+        }
+
+        .loding_text {
+            font-size: 20px;
+            color: #fff;
+            font-weight: 900;
+            animation: text_fade 1.5s infinite;
+        }
+
+        @keyframes bolls {
+            0% {
+                transform: translateY(1);
+            }
+            50% {
+                transform: translateY(20px);
+            }
+        }
+
+        @keyframes text_fade {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <section class="loding_container">
+    <section class="loding_contianer">
         <div class="dots">
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
         </div>
-        <p class="loadng_text">
-            사이트를 준비중입니다.
-        </p>
+        <p class="loding_text">사이트를 준비중입니다.</p>
     </section>
 
     <section class="main_container">
         <h1>로딩완료</h1>
         <p>웹페이지 확인 가능</p>
     </section>
+
+    <script>
+        function hideLoading(){
+            //loding_contianer랑 main_container 가져오기
+            // 로딩컨테이너에 히든 클래스 붙이기
+            //메인컨테이너의 스타일을 display block 으로 변경하기
+            const lodingContainer = document.querySelector('.loding_contianer');
+            const mainContainer = document.querySelector('.main_contianer');
+            lodingContainer.classList.add("hidden");
+            mainContainer.style.display = 'block';
+        }
+
+        // 브라우저를 로드했을 때 ( DOMContentLoaded ) hideLoading함수를 실행
+        document.addEventListener("DOMContentLoaded",function(){
+            setTimeout(hideLoading,3000);
+        })
+    </script>
 </body>
 </html>
