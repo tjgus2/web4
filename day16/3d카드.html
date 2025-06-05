@@ -38,7 +38,15 @@
             bottom: 20px;
             left: 20px;
             color: #fff;
-            transform: translateZ(100%);
+            transform: translateZ(100px);
+            /* translateY : 세로로 이동 */
+            /* translateX : 가로로 이동 */
+            /* translateZ : 안쪽으로 이동 : 깊이감을 표현한다. */
+        }
+
+        .card_content > h2 {
+            margin: 0;
+            font-size: 20px;
         }
 
         .card_content > p {
@@ -91,7 +99,11 @@
                 const rotateY = (x-centerX) / 15;
                 // x(마우스가 카드에서 얼마나 들어와있는가)-centerX(카드의 가로중앙)
 
-                card.style.tranform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener("mouseleave", () => {
+                card.style.transform = `rotateX(0deg) rotateY(0deg)`;
             })
         })
     </script>
